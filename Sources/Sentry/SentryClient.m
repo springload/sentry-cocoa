@@ -79,9 +79,10 @@ static SentryInstallation *installation = nil;
 #pragma mark Initializer
 
 - (_Nullable instancetype)initWithOptions:(NSDictionary<NSString *, id> *)options
+                                 delegate:(_Nullable id<NSURLSessionDelegate>)delegate
                          didFailWithError:(NSError *_Nullable *_Nullable)error {
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration ephemeralSessionConfiguration];
-    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:configuration delegate:delegate delegateQueue:NULL];
     return [self initWithOptions:options
                   requestManager:[[SentryQueueableRequestManager alloc] initWithSession:session]
                 didFailWithError:error];
@@ -89,8 +90,10 @@ static SentryInstallation *installation = nil;
     
     
 - (_Nullable instancetype)initWithDsn:(NSString *)dsn
+                             delegate:(_Nullable id<NSURLSessionDelegate>)delegate
                      didFailWithError:(NSError *_Nullable *_Nullable)error {
     return [self initWithOptions:@{@"dsn": dsn}
+                        delegate: delegate
                 didFailWithError:error];
 }
 

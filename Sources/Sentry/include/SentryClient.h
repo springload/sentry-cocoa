@@ -147,6 +147,7 @@ NS_SWIFT_NAME(Client)
  * @return SentryClient
  */
 - (_Nullable instancetype)initWithDsn:(NSString *)dsn
+                             delegate:(_Nullable id<NSURLSessionDelegate>)delegate
                      didFailWithError:(NSError *_Nullable *_Nullable)error;
     
 /**
@@ -157,6 +158,7 @@ NS_SWIFT_NAME(Client)
  * @return SentryClient
  */
 - (_Nullable instancetype)initWithOptions:(NSDictionary<NSString *, id> *)options
+                                 delegate:(_Nullable id<NSURLSessionDelegate>)delegate
                          didFailWithError:(NSError *_Nullable *_Nullable)error;
 
 /**
